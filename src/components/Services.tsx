@@ -35,7 +35,7 @@ const services = [
     slug: 'remote-tech-support',
     title: 'Remote Tech Support',
     description: 'Tech problems solved remotely — fast and secure.',
-    image: '/images/remote.gif',
+    image: '/images/2.gif',
     features: ['Desktop Help', 'Diagnostics', 'Live Support'],
   },
   {
@@ -72,8 +72,8 @@ export default function Services() {
             src={service.image}
             alt={service.title}
           />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{service.title}</div>
+          <div className="px-6 pt-4 pb-6">
+            <div className="font-bold text-xl mb-2 text-center">{service.title}</div>
             <p className="text-gray-700 text-base">{service.description}</p>
           </div>
           <div className="px-6 pt-4 pb-6">
@@ -85,10 +85,10 @@ export default function Services() {
                 #{feature}
               </span>
             ))}
-            <div className="mt-4">
+            <div className="flex justify-center mt-4">
               <Link
                 href={`/services/${service.slug}`}
-                className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition center"
+                className="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition center"
               >
                 Learn More
               </Link>

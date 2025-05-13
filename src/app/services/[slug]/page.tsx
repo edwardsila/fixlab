@@ -1,55 +1,123 @@
 import { notFound } from "next/navigation";
+import ServiceHeader from "@/components/ServiceHeader";
+import ServiceFeatures from "@/components/ServiceFeatures";
+import ServiceCTA from "@/components/ServiceCTA";
 
-const services = {
+// Define the type for slugs
+export type ServiceSlug =
+  | "website-editing"
+  | "backend-development"
+  | "pdf-editing"
+  | "file-conversion"
+  | "software-installation"
+  | "remote-tech-support"
+  | "on-site-services";
+
+// All your service data centralized
+const services: Record<ServiceSlug, {
+  title: string;
+  description: string;
+  features: string[];
+  image: string;
+}> = {
   "website-editing": {
     title: "Website Creation & Editing",
-    description: "We create, edit, and improve websites using modern tools and best practices. Whether it's a new site or revamping an existing one—we've got you.",
+    description: "Custom-built, beautiful, and responsive websites that grow your brand and audience.",
+    features: [
+      "Custom Design & UI/UX",
+      "Responsive Layouts",
+      "SEO Optimization",
+      "CMS Integration (WordPress, Headless CMS)",
+      "Performance Tuning",
+    ],
+    image: "/images/web3.png", // Place this image in public/images/
   },
   "backend-development": {
     title: "Backend Development",
-    description: "Custom APIs, database integration, and secure server logic to power your apps. We build robust, scalable backend solutions.",
+    description: "APIs, databases, and robust server logic — built for scale, speed and security.",
+    features: [
+      "RESTful & GraphQL APIs",
+      "MongoDB / PostgreSQL Setup",
+      "Authentication & Security",
+      "Cloud Integration",
+    ],
+    image: "/images/website.jpg",
   },
   "pdf-editing": {
-    title: "PDF Editing",
-    description: "From form filling to rearranging pages and modifying content—we handle all your PDF needs with precision.",
+    title: "PDF Editing Services",
+    description: "Edit, split, merge or enhance your PDF documents for professional output.",
+    features: [
+      "PDF Merging/Splitting",
+      "Text & Image Insertion",
+      "File Compression",
+    ],
+    image: "/images/pdf-bg.jpg",
   },
   "file-conversion": {
-    title: "File Editing & Conversion",
-    description: "Convert between document formats, clean up content, or restructure files to your exact specifications.",
+    title: "File Conversion Services",
+    description: "Convert files to and from multiple formats (Word, Excel, Images, Audio etc.)",
+    features: [
+      "Word ↔ PDF",
+      "Image Format Changes",
+      "Excel ↔ CSV",
+    ],
+    image: "/images/conversion-bg.jpg",
   },
   "software-installation": {
-    title: "Software Installation Support",
-    description: "Having trouble installing or configuring software? We guide you remotely or step in on-site to help.",
+    title: "Software Installation",
+    description: "Remote or in-person software setup for Windows/Linux systems.",
+    features: [
+      "MS Office & Adobe Products",
+      "Driver & Utility Installation",
+      "OS Reinstallation Help",
+    ],
+    image: "/images/install-bg.jpg",
   },
   "remote-tech-support": {
     title: "Remote Tech Support",
-    description: "Chat, video, or remote desktop—we solve your tech issues without needing to be there physically.",
+    description: "Need quick help? We connect remotely and solve your tech headaches.",
+    features: [
+      "Remote Desktop Support",
+      "Live Chat & Video Support",
+      "System Diagnostics",
+    ],
+    image: "/images/remote-bg.jpg",
   },
   "on-site-services": {
-    title: "On-Site Services",
-    description: "We come to you. For Nairobi clients and nearby, we offer in-person support and installations.",
+    title: "On-Site Tech Services",
+    description: "For Nairobi-based clients – physical service at your doorstep.",
+    features: [
+      "Hardware Fixes",
+      "Networking Setup",
+      "Software Support",
+    ],
+    image: "/images/onsite-bg.jpg",
   },
-} as const;
+};
 
-type ServiceSlug = keyof typeof services;
 
-export default function ServicePage({ params }: { params: { slug: ServiceSlug } }) {
-    const service = services[params.slug];
+// Main dynamic service page
+export default function ServicePage({
+    params,
+  }: {
+    params: { slug: string };
+  }) {
+    const slug = params.slug as ServiceSlug;
+  
+    const service = services[slug];
+  
+    // If no matching service found, show 404 page
+    if (!service) return notFound();
   
     return (
-      <div className="max-w-4xl mx-auto py-16 px-4">
-        <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
-        <p className="text-gray-700 text-lg mb-8">{service.description}</p>
-  
-        <div className="bg-gray-100 p-6 rounded-xl">
-          <h2 className="text-2xl font-semibold mb-2">Coming Soon:</h2>
-          <ul className="list-disc list-inside text-gray-600">
-            <li>Feature previews</li>
-            <li>Client testimonials</li>
-            <li>Live demo or portfolio links</li>
-            <li>“Request Service” or “Buy Now” buttons</li>
-          </ul>
-        </div>
-      </div>
+      <>
+        <ServiceHeader
+          title={service.title}
+          description={service.description}
+          image={service.image}
+        />
+        <ServiceFeatures features={service.features} />
+        <ServiceCTA />
+      </>
     );
   }

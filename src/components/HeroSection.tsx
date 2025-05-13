@@ -1,11 +1,33 @@
+"use client";
+
 export default function Hero() {
-    return (
-      <section className="text-center py-20 px-4 bg-gray-50">
-        <h2 className="text-4xl font-bold mb-4">Your Digital Fix Starts Here</h2>
-        <p className="text-lg mb-6 max-w-xl mx-auto">
-          Fast, professional tech services—online or at your doorstep.
-        </p>
-        <a href="#get-started" className="bg-black text-white px-6 py-3 rounded-xl font-medium">Get Started</a>
-      </section>
-    );
-  }  
+  return (
+    <section className="bg-white h-[75vh] flex items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between w-full">
+
+        {/* Left: Text Content */}
+        <div className="w-full lg:w-1/2 text-center lg:text-left px-4 lg:px-8">
+          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+              FIX-LAB<br className="hidden lg:block" />
+              Services
+          </h1>
+          <p className="text-lg text-gray-600 mb-8 max-w-lg">
+            Fast, professional tech services—online or at your doorstep. Let us help you solve problems, save time, and stay productive.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center lg:items-start lg:justify-start gap-4">
+
+         </div>
+          </div>
+
+        {/* Right: Image Column */}
+        <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 mt-12 lg:mt-0">
+          <img src="/images/1.gif" alt="Tech Support 1" className="rounded-xl shadow-lg w-full h-44 object-cover" />
+          <img src="/images/2.gif" alt="Tech Support 2" className="rounded-xl shadow-lg w-full h-44 object-cover" />
+          <img src="/images/3.gif" alt="Tech Support 3" className="rounded-xl shadow-lg w-full h-44 object-cover" />
+          <img src="/images/4.gif" alt="Tech Support 4" className="rounded-xl shadow-lg w-full h-44 object-cover" />
+        </div>
+
+      </div>
+    </section>
+  );
+}
